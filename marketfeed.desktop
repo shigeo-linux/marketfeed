@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Marketfeed
+GenericName=Financial Briefing
+Comment=Markets, gold, silver, bitcoin, bonds and financial news sent to Telegram
+Exec=python3 /opt/marketfeed/marketfeed.py
+Icon=marketfeed
+Terminal=false
+Categories=Network;Utility;
+Keywords=finance;markets;stocks;news;telegram;
+StartupNotify=true
