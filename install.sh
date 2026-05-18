@@ -44,10 +44,15 @@ echo "Installing systemd user timer..."
 mkdir -p "${SYSTEMD_USER_DIR}"
 cp "${INSTALL_DIR}/marketfeed.service" "${SYSTEMD_USER_DIR}/marketfeed.service"
 cp "${INSTALL_DIR}/marketfeed.timer"   "${SYSTEMD_USER_DIR}/marketfeed.timer"
+sudo loginctl enable-linger "$(whoami)"
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-systemctl --user daemon-reload
-systemctl --user enable marketfeed.timer
-systemctl --user start marketfeed.timer
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+if systemctl --user daemon-reload 2>/dev/null; then
+    systemctl --user enable marketfeed.timer
+    systemctl --user start marketfeed.timer
+else
+    echo "Note: Timer files installed. Run 'systemctl --user enable --now marketfeed.timer' after logging in."
+fi
 
 echo ""
 echo "=== Installation complete! ==="
