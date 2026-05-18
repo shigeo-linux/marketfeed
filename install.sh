@@ -44,6 +44,7 @@ echo "Installing systemd user timer..."
 mkdir -p "${SYSTEMD_USER_DIR}"
 cp "${INSTALL_DIR}/marketfeed.service" "${SYSTEMD_USER_DIR}/marketfeed.service"
 cp "${INSTALL_DIR}/marketfeed.timer"   "${SYSTEMD_USER_DIR}/marketfeed.timer"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 systemctl --user daemon-reload
 systemctl --user enable marketfeed.timer
 systemctl --user start marketfeed.timer
