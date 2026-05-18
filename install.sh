@@ -35,6 +35,9 @@ exec python3 /opt/marketfeed/marketfeed.py "$@"
 EOF
 sudo chmod +x /usr/local/bin/marketfeed
 
+echo "Creating config directory..."
+mkdir -p "$HOME/.config/${APP_NAME}"
+
 echo "Installing systemd user timer..."
 mkdir -p "${SYSTEMD_USER_DIR}"
 cp "${INSTALL_DIR}/marketfeed.service" "${SYSTEMD_USER_DIR}/marketfeed.service"
